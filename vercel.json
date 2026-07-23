@@ -1,0 +1,14 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/books", "destination": "/books.html" },
+    { "source": "/bio", "destination": "/bio.html" },
+    { "source": "/journals", "destination": "/journals.html" },
+    { "source": "/articles", "destination": "/articles.html" },
+    { "source": "/interviews", "destination": "/interviews.html" },
+    { "source": "/events", "destination": "/events.html" },
+    { "source": "/gallery", "destination": "/gallery.html" },
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/admin", "destination": "/admin.html" }
+  ]
+}
