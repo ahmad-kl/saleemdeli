@@ -3,561 +3,176 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>saleem deli</title>
+    <title>Saleem Deli</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600&display=swap" rel="stylesheet" />
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
-        
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{
+            font-family: 'Inter', sans-serif;
             background-color: #faf9f7;
             color: #1e1e1e;
-            line-height: 1.5;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .header {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 1.5rem 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-            background-color: #faf9f7;
-            position: relative;
-            z-index: 10;
+        /* ── Header (മുകളിൽ, 450px-ൽ കേന്ദ്രീകരിച്ച്) ── */
+        .header{
             width: 100%;
+            max-width: 450px;
+            margin: 0 auto 2rem auto;
+            text-align: left;
         }
-
-        .site-name {
+        .site-name{
             font-size: 1.5rem;
             font-weight: 600;
             letter-spacing: -0.02em;
             color: #1e1e1e;
-            transition: color 0.2s;
-        }
-        .site-name:hover {
-            color: #666;
         }
 
-        
-        .nav {
-            display: flex;
-            align-items: center;
-            gap: 1.75rem;
-        }
-
-        .nav a {
-            font-size: 0.9rem;
-            font-weight: 400;
-            color: #3a3a3a;
-            transition: color 0.2s;
-            position: relative;
-        }
-
-        .nav a::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -4px;
-            width: 0;
-            height: 1.5px;
-            background-color: #1e1e1e;
-            transition: width 0.25s ease;
-        }
-
-        .nav a:hover {
-            color: #000;
-        }
-        .nav a:hover::after {
+        /* ── Icon Grid Container ── */
+        .folder-container{
             width: 100%;
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 4px;
-            z-index: 20;
-        }
-
-        .hamburger span {
-            display: block;
-            width: 26px;
-            height: 2px;
-            background-color: #1e1e1e;
-            border-radius: 2px;
-            transition: 0.25s ease;
-            transform-origin: center;
-        }
-
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
-
-        @media (max-width: 820px) {
-            .hamburger {
-                display: flex;
-            }
-
-            .nav {
-                position: fixed;
-                top: 0;
-                right: 0;
-                width: 100%;
-                max-width: 340px;
-                height: 100vh;
-                background-color: #faf9f7;
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 6rem 2.5rem 2.5rem 2.5rem;
-                gap: 1.25rem;
-                box-shadow: -8px 0 30px rgba(0, 0, 0, 0.04);
-                transform: translateX(100%);
-                transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-                border-left: 1px solid rgba(0, 0, 0, 0.04);
-                overflow-y: auto;
-            }
-
-            .nav.open {
-                transform: translateX(0);
-            }
-
-            .nav a {
-                font-size: 1.1rem;
-                font-weight: 400;
-                width: 100%;
-                padding: 0.3rem 0;
-                border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-            }
-
-            .nav a::after {
-                display: none;
-            }
-
-            .nav a:hover {
-                padding-left: 0.5rem;
-                border-bottom-color: #1e1e1e;
-            }
-
-            .backdrop {
-                display: none;
-                position: fixed;
-                inset: 0;
-                background-color: rgba(0, 0, 0, 0.08);
-                z-index: 5;
-                backdrop-filter: blur(2px);
-            }
-            .backdrop.visible {
-                display: block;
-            }
-
-            .header {
-                padding: 1rem 1.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header {
-                padding: 0.75rem 1.25rem;
-            }
-            .site-name {
-                font-size: 1.25rem;
-            }
-            .nav {
-                max-width: 280px;
-                padding: 5rem 1.75rem 1.75rem 1.75rem;
-            }
-        }
-
-        .main {
-            max-width: 1280px;
+            max-width: 450px;
             margin: 0 auto;
-            padding: 4rem 2rem 2rem;
-            flex: 1;
-            width: 100%;
+            padding: 0;
         }
 
-        .hero-slider-wrapper {
-            position: relative;
-            min-height: 300px;
-            margin-bottom: 2rem;
+        /* ── App Grid (പ്രൊഫഷണൽ ലേഔട്ട്) ── */
+        .app-grid{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem 1.5rem;
+            justify-items: center;
         }
 
-        .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.8s ease-in-out, visibility 0.8s;
-            pointer-events: none;
-        }
-
-        .slide.active {
-            position: relative;
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
-        }
-
-        .slide-content {
-            display: flex;
-            gap: 2.5rem;
-            align-items: center;
-        }
-
-        .book-cover {
-            width: 180px;
-            height: 260px;
-            object-fit: cover;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-            flex-shrink: 0;
-        }
-
-        .slide-text {
-            flex: 1;
+        .app-item{
             display: flex;
             flex-direction: column;
-            min-width: 0;
+            align-items: center;
+            text-decoration: none;
+            color: #1e1e1e;
+            gap: 0.6rem;
             width: 100%;
+            transition: transform 0.2s, opacity 0.2s;
         }
+        .app-item:hover{ transform: translateY(-4px); opacity: 0.8; }
 
-        .slide-text h1 {
-            font-size: 3rem;
-            font-weight: 300;
-            letter-spacing: -0.03em;
-            color: #1e1e1e;
-            margin-bottom: 0.2rem;
-            overflow-wrap: break-word;
-            word-break: break-word;
-        }
-
-        .slide-text .tagline {
-            font-size: 1.2rem;
-            font-weight: 400;
-            color: #4a4a4a;
-            margin-bottom: 0.5rem;
-            overflow-wrap: break-word;
-            word-break: break-word;
-        }
-
-        .slide-text p {
-            font-size: 1.05rem;
-            color: #5a5a5a;
-            font-weight: 300;
-            max-width: 500px;
-            margin-bottom: 1.2rem;
-            overflow-wrap: break-word;
-            word-break: break-word;
-        }
-
-        .buy-btn {
-            display: inline-block;
-            padding: 0.6rem 1.6rem;
-            font-size: 0.95rem;
-            font-weight: 400;
-            color: #1e1e1e;
-            border: 1px solid #1e1e1e;
-            border-radius: 30px;
-            transition: all 0.25s ease;
-            width: fit-content;
-            background: transparent;
-            cursor: pointer;
-        }
-
-        .buy-btn:hover {
-            background-color: #1e1e1e;
-            color: #faf9f7;
-            transform: translateY(-1px);
-        }
-
-        @media (max-width: 720px) {
-            .slide-content {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1.5rem;
-            }
-            .book-cover {
-                width: 140px;
-                height: 200px;
-            }
-            .slide-text h1 {
-                font-size: 2.2rem;
-            }
-            .slide-text .tagline {
-                font-size: 1rem;
-            }
-            .slide-text p {
-                font-size: 0.95rem;
-            }
-            .hero-slider-wrapper {
-                min-height: 200px;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .slide-text h1 {
-                font-size: 1.8rem;
-            }
-            .book-cover {
-                width: 120px;
-                height: 170px;
-            }
-        }
-
-        .divider {
-            width: 60px;
-            height: 1.5px;
-            background-color: #d0d0d0;
-            margin: 0 0 2.5rem 0;
-        }
-
-        .bio-section {
-            max-width: 700px;
-        }
-
-        .section-title {
-            font-size: 1.1rem;
-            font-weight: 500;
-            letter-spacing: 0.03em;
-            color: #4a4a4a;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-        }
-
-        .bio-content p {
-            font-size: 1.05rem;
-            font-weight: 300;
-            color: #4a4a4a;
-            margin-bottom: 0.8rem;
-            line-height: 1.6;
-        }
-
-        .bio-links {
-            margin-top: 1.8rem;
+        .app-icon{
+            width: 75px;
+            height: 75px;
+            border-radius: 22px;
             display: flex;
-            gap: 1.2rem;
-            align-items: center;
-        }
-        .bio-links a {
-            color: #1e1e1e;
-            font-size: 1.6rem;
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
             justify-content: center;
-            border-bottom: none;
+            align-items: center;
+            font-size: 2rem;
+            background-color: #f0efec;
+            color: #1e1e1e;
+            transition: background-color 0.2s, transform 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
         }
-        .bio-links a:hover {
-            color: #888;
-            transform: translateY(-3px);
+        .app-item:hover .app-icon{
+            background-color: #e8e6e1;
+            transform: scale(1.05);
         }
 
-        .footer {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 2rem 2rem 2.5rem;
-            width: 100%;
-            border-top: 1px solid rgba(0, 0, 0, 0.04);
+        .app-label{
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: #5a5a5a;
             text-align: center;
+        }
+
+        /* ── Footer (പൂർണ്ണ വീതിയിൽ, ഏറ്റവും താഴെ) ── */
+        .footer{
+            width: 100%;
+            margin-top: auto;
+            text-align: center;
+            padding-top: 2rem;
             font-size: 0.85rem;
             font-weight: 300;
             color: #8a8a8a;
             letter-spacing: 0.01em;
         }
-        .footer span {
+        .footer span{
             color: #1e1e1e;
             font-weight: 400;
         }
 
-        @media (max-width: 600px) {
-            .main {
-                padding: 2.5rem 1.5rem 1.5rem;
-            }
-            .footer {
-                padding: 1.5rem 1.5rem 2rem;
-            }
+        /* ── Responsive ── */
+        @media(max-width: 480px){
+            body{ padding: 1.5rem 1rem 1rem 1rem; }
+            .header, .folder-container{ max-width: 100%; }
+            .app-icon{ width: 60px; height: 60px; font-size: 1.6rem; border-radius: 16px; }
+            .app-grid{ gap: 1.5rem 1rem; }
+            .app-label{ font-size: 0.7rem; }
         }
     </style>
 </head>
-
 <body>
 
-    <!-- ─── backdrop (mobile) ─── -->
-    <div class="backdrop" id="backdrop"></div>
-
-    <!-- ─── header ─── -->
+    <!-- ─── HEADER ─── -->
     <header class="header">
-        <a href="index.html" class="site-name">Saleem Deli</a>
-
-        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-
-       <nav class="nav" id="nav">
-        <a href="/">Home</a>
-        <a href="/bio">Bio</a>
-        <a href="/books">Books</a>
-        <a href="/journals">Journals</a>
-        <a href="/articles">Articles</a>
-        <a href="/interviews">Interviews</a>
-        <a href="/events">Events</a>
-        <a href="/gallery">Gallery</a>
-        <a href="/contact">Contact</a>
-    </nav>
+        <div class="site-name">Saleem Deli</div>
     </header>
 
-    <!-- ─── main portfolio content ─── -->
-    <main class="main">
+    <!-- ─── ICON GRID ─── -->
+    <div class="folder-container">
+        <div class="app-grid">
+            <a href="books.html" class="app-item">
+                <div class="app-icon"><i class="fa-solid fa-book"></i></div>
+                <span class="app-label">Books</span>
+            </a>
 
-        <!-- HERO SECTION: 3 rotating books -->
-        <div class="hero-slider-wrapper">
-            
-            <!-- Book 1 -->
-            <div class="slide active">
-                <div class="slide-content">
-                    <img src="https://res.cloudinary.com/dsfycdl5o/image/upload/v1784744385/phalastinebook_duanz1.jpg" alt="The Fragile Shore book cover" class="book-cover" />
-                    <div class="slide-text">
-                        <h1>ഫലസ്തീന്‍ കുടിയിറക്കപ്പെടുന്നവരുടെ രാജ്യം</h1>
-                        <div class="tagline">ഇസാറാഈല്‍-ഫലസ്തീന്‍ വിഷയത്തെ കേവലമൊരു സംഘര്‍ഷം എന്നതിലപ്പുറം കോളനിവല്‍കരണം, അധിനിവേശം, വംശീയവിവേചനം തുടങ്ങിയ സംജ്ഞകളുടെ പശ്ചാത്തലത്തല്‍ അപഗ്രഥിക്കുന്ന മലയാളത്തലെ ആദ്യ കൃതി </div>
-                        <p></p>
-                        <a href="https://www.zyberbooks.com/product/palestine-kudiyirakkappedunnavarude-rajyam/?v=320f6443c56b" class="buy-btn">Buy Now →</a>
-                    </div>
-                </div>
-            </div>
+            <a href="journals.html" class="app-item">
+                <div class="app-icon"><i class="fa-solid fa-book-open"></i></div>
+                <span class="app-label">Journals</span>
+            </a>
 
-            <!-- Book 2 -->
-            <div class="slide">
-                <div class="slide-content">
-                    <img src="https://bookplus.co.in/wp-content/uploads/2024/05/IMG_0442-2-scaled.jpeg" alt="Silence in Form book cover" class="book-cover" />
-                    <div class="slide-text">
-                        <h1>ഇസ്‌ലാമോഫോബിയ</h1>
-                        <div class="tagline">പഠനങ്ങള്‍  &amp;സംവാദങ്ങള്‍</div>
-                        <p>അന്തര്‍ദേശീയ-ദേശീയ രംഗങ്ങളിലെ അക്കാദമിക്കുകളുടെ ലേഖനങ്ങള്‍ ഉള്‍ക്കൊള്ളുന്ന കൃതി.</p>
-                        <a href="https://bookplus.co.in/books/islamophobia-padanangal-samvadangal/" class="buy-btn">Buy Now →</a>
-                    </div>
-                </div>
-            </div>
+            <a href="articles.html" class="app-item">
+                <div class="app-icon"><i class="fa-solid fa-newspaper"></i></div>
+                <span class="app-label">Articles</span>
+            </a>
 
-            <!-- Book 3 -->
-            <div class="slide">
-                <div class="slide-content">
-                    <img src="https://bookplus.co.in/wp-content/uploads/2026/02/IMG_0200.jpeg" alt="Book.image" class="book-cover" />
-                    <div class="slide-text">
-                        <h1>എന്റെ കഥ വിദ്യാഭ്യാസത്തിന്റെയും</h1>
-                        <div class="tagline">കേരളത്തിലെ മുസ്ലിം നവോഥാന ചരിത്രത്തിൽ വിദ്യാഭ്യാസ പ്രവർത്തനത്തിന് പുതിയ മാനങ്ങൾ നൽകിയ ഖാസി സി.എം. അബ്ദുല്ല മൗലവിയുടെ ജീവിതകഥ </div>
-                        <p></p>
-                        <a href="https://bookplus.co.in/books/ente-kadha-vidhyabhasathinteyum/" class="buy-btn">Buy Now →</a>
-                    </div>
-                </div>
-            </div>
+            <a href="interviews.html" class="app-item">
+                <div class="app-icon"><i class="fa-solid fa-microphone"></i></div>
+                <span class="app-label">Interviews</span>
+            </a>
 
+            <a href="events.html" class="app-item">
+                <div class="app-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                <span class="app-label">Events</span>
+            </a>
+
+            <a href="gallery.html" class="app-item">
+                <div class="app-icon"><i class="fa-solid fa-images"></i></div>
+                <span class="app-label">Gallery</span>
+            </a>
+
+            <a href="contact.html" class="app-item">
+                <div class="app-icon"><i class="fa-solid fa-envelope"></i></div>
+                <span class="app-label">Contact</span>
+            </a>
+
+            <a href="bio.html" class="app-item">
+                <div class="app-icon"><i class="fa-solid fa-user"></i></div>
+                <span class="app-label">Bio</span>
+            </a>
+
+            <!-- 3x3 Grid balance -->
+            <div style="visibility: hidden;"></div>
         </div>
-
-        <div class="divider"></div>
-
-        <!-- ─── BIO SECTION ─── -->
-        <section class="bio-section">
-            <h2 class="section-title">About the Author</h2>
-            <div class="bio-content">
-                <p>സലീം അഹമ്മദ് ഷാഫി, കാസറഗോഡ് ജില്ലയിലെ ദേളി സ്വദേശം. തുഞ്ചത്തെഴുത്തച്ഛൻ മലയാളസർവ്വകലാശാലയിൽ നിന്ന് മലയാളം ക്രിയേറ്റീവ് റൈറ്റിങിൽ പി.ജി പഠനം പൂർത്തിയാക്കി. നിലവിൽ എസ്.എം.എസ്.ടി.എം വിമൻസ് കോളേജ്, ആതവനാട്, മലപ്പുറം ഗസ്റ്റ് ലക്ചർ ആയി ജോലി ചെയ്യുന്നു.</p>
-                
-                <!-- Social Media Icons (Instagram, Facebook, WhatsApp) -->
-                <div class="bio-links">
-                    <a href="https://www.instagram.com/saleeemshafi" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.facebook.com/share/1GWpuD3oGh/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://wa.me/9656328906" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-            
-                </div>
-            </div>
-        </section>
-
-    </main>
+    </div>
 
     <!-- ─── FOOTER ─── -->
     <footer class="footer">
         <p>© <span id="year"></span> <span>Saleem Deli</span>. All rights reserved.</p>
     </footer>
 
-    <!-- ─── script ─── -->
     <script>
-        (function() {
-            // Hamburger menu logic
-            const hamburger = document.getElementById('hamburger');
-            const nav = document.getElementById('nav');
-            const backdrop = document.getElementById('backdrop');
-
-            function toggleMenu() {
-                const isOpen = nav.classList.toggle('open');
-                hamburger.classList.toggle('active');
-                backdrop.classList.toggle('visible');
-                document.body.style.overflow = isOpen ? 'hidden' : '';
-            }
-
-            function closeMenu() {
-                nav.classList.remove('open');
-                hamburger.classList.remove('active');
-                backdrop.classList.remove('visible');
-                document.body.style.overflow = '';
-            }
-
-            hamburger.addEventListener('click', toggleMenu);
-            backdrop.addEventListener('click', closeMenu);
-
-            nav.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', closeMenu);
-            });
-
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') closeMenu();
-            });
-
-            // ── BOOK SLIDER LOGIC ──
-            const slides = document.querySelectorAll('.slide');
-            let currentSlide = 0;
-
-            setInterval(() => {
-                slides[currentSlide].classList.remove('active');
-                currentSlide = (currentSlide + 1) % slides.length;
-                slides[currentSlide].classList.add('active');
-            }, 3000);
-
-            // ── Footer Year ──
-            document.getElementById('year').textContent = new Date().getFullYear();
-
-        })();
+        document.getElementById('year').textContent = new Date().getFullYear();
     </script>
-
 </body>
 </html>
