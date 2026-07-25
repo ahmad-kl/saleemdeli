@@ -96,12 +96,42 @@
             text-align: center;
         }
 
-        /* ── Social Area ── */
+        /* 🔥 BIO WRAPPER (App Grid-ന് ശേഷം) 🔥 */
+        .bio-wrapper{
+            width: 100%;
+            max-width: 450px;
+            margin: 3rem auto 1rem auto; /* 3rem space after grid, 1rem before social */
+            min-height: 5rem;
+            text-align: center;
+            padding: 0;
+        }
+        .bio-text{
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #5a5a5a;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+        .cursor{
+            display: inline-block;
+            width: 2px;
+            height: 1.2rem;
+            background-color: #5a5a5a;
+            margin-left: 2px;
+            vertical-align: text-bottom;
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* ── Social Area (Bio-യ്ക്ക് ശേഷം) ── */
         .social-area{
             display: flex;
             justify-content: center;
             gap: 1.5rem;
-            margin: 1rem auto 0 auto;
+            margin: 2rem auto 0 auto; /* 2rem space after bio */
             max-width: 450px;
             width: 100%;
         }
@@ -115,40 +145,10 @@
             transform: translateY(-2px);
         }
 
-        /* 🔥 BIO WRAPPER (വലുതാക്കി, മധ്യത്തിലാക്കി) 🔥 */
-        .bio-wrapper{
-            width: 100%;
-            max-width: 450px;
-            margin: 2rem auto 1rem auto;
-            min-height: 5rem; /* വലിയ ഫോണ്ടിന് അനുസൃതമായി ഉയരം കൂട്ടി */
-            text-align: center; /* ടെക്സ്റ്റ് മധ്യത്തിലാക്കാൻ */
-            padding: 0;
-        }
-        .bio-text{
-            font-size: 1.2rem; /* വലുപ്പം കൂട്ടി */
-            font-weight: 300;
-            color: #5a5a5a;
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            white-space: pre-wrap;
-        }
-        .cursor{
-            display: inline-block;
-            width: 2px;
-            height: 1.2rem; /* ഫോണ്ട് വലുപ്പത്തിന് അനുസരിച്ച് കഴ്സർ ഉയരം കൂട്ടി */
-            background-color: #5a5a5a;
-            margin-left: 2px;
-            vertical-align: text-bottom;
-            animation: blink 1s step-end infinite;
-        }
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-
         /* ── Footer ── */
         .footer{
             width: 100%;
-            margin-top: auto; /* ഫൂട്ടറിനെ ഏറ്റവും താഴെ എത്തിക്കും */
+            margin-top: auto;
             text-align: center;
             padding: 1rem 1.5rem 1.5rem 1.5rem;
             font-size: 0.85rem;
@@ -168,6 +168,9 @@
             .app-icon{ width: 60px; height: 60px; font-size: 1.6rem; border-radius: 16px; }
             .app-grid{ gap: 1.5rem 1rem; }
             .app-label{ font-size: 0.7rem; }
+            /* Mobile adjustments for spacing */
+            .bio-wrapper{ margin-top: 2rem; } 
+            .social-area{ margin-top: 1.5rem; }
             .footer{ padding: 0.8rem 1rem 1.5rem 1.5rem; }
         }
     </style>
@@ -221,17 +224,17 @@
             </div>
         </div>
 
-        <!-- SOCIAL MEDIA -->
+        <!-- 🔥 TYPING BIO (Main Icons-ന് ശേഷം, Social-ന് മുമ്പ്) 🔥 -->
+        <div class="bio-wrapper">
+            <span class="bio-text" id="typingText"></span>
+            <span class="cursor" id="cursor"></span>
+        </div>
+
+        <!-- SOCIAL MEDIA (Bio-യ്ക്ക് ശേഷം) -->
         <div class="social-area">
             <a href="https://www.instagram.com/saleeemshafi" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             <a href="https://www.facebook.com/share/1GWpuD3oGh/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
             <a href="https://wa.me/9656328906" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        </div>
-
-        <!-- 🔥 TYPING BIO (LINE BY LINE, BIGGER & CENTERED) 🔥 -->
-        <div class="bio-wrapper">
-            <span class="bio-text" id="typingText"></span>
-            <span class="cursor" id="cursor"></span>
         </div>
 
         <!-- FOOTER -->
