@@ -8,17 +8,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
         *{margin:0;padding:0;box-sizing:border-box;}
+        
+        /* ── HTML / BODY (100% ഉയരം നിലനിർത്താൻ) ── */
+        html, body { height: 100%; }
         body{
             font-family: 'Inter', sans-serif;
             background-color: #faf9f7;
             color: #1e1e1e;
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            padding: 0; /* പാഡിംഗ് പൂർണ്ണമായും നീക്കം ചെയ്തു */
         }
 
-        /* ── Header (മുകളിൽ, 450px-ൽ കേന്ദ്രീകരിച്ച്) ── */
+        /* ── MAIN CONTENT (പൂർണ്ണ ഉയരം നിറയ്ക്കാൻ) ── */
+        .main-content{
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1.5rem 0 1.5rem; /* മുകളിലും വശങ്ങളിലും പാഡിംഗ് */
+        }
+
+        /* ── Header ── */
         .header{
             width: 100%;
             max-width: 450px;
@@ -40,7 +51,7 @@
             padding: 0;
         }
 
-        /* ── App Grid (പ്രൊഫഷണൽ ലേഔട്ട്) ── */
+        /* ── App Grid ── */
         .app-grid{
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -85,12 +96,31 @@
             text-align: center;
         }
 
-        /* ── Footer (പൂർണ്ണ വീതിയിൽ, ഏറ്റവും താഴെ) ── */
+        /* ── Social Area ── */
+        .social-area{
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem auto 0 auto;
+            max-width: 450px;
+            width: 100%;
+        }
+        .social-area a{
+            font-size: 1.8rem;
+            color: #1e1e1e;
+            transition: all 0.2s ease;
+        }
+        .social-area a:hover{
+            color: #888;
+            transform: translateY(-2px);
+        }
+
+        /* ── Footer (ഇത് main-content-നുള്ളിൽ തന്നെയുണ്ട്) ── */
         .footer{
             width: 100%;
-            margin-top: auto;
+            margin-top: auto; /* ഫൂട്ടറിനെ ഏറ്റവും താഴെ എത്തിക്കും */
             text-align: center;
-            padding-top: 2rem;
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
             font-size: 0.85rem;
             font-weight: 300;
             color: #8a8a8a;
@@ -103,73 +133,77 @@
 
         /* ── Responsive ── */
         @media(max-width: 480px){
-            body{ padding: 1.5rem 1rem 1rem 1rem; }
-            .header, .folder-container{ max-width: 100%; }
+            .main-content{ padding: 1.5rem 1rem 0 1rem; }
+            .header, .folder-container, .social-area{ max-width: 100%; }
             .app-icon{ width: 60px; height: 60px; font-size: 1.6rem; border-radius: 16px; }
             .app-grid{ gap: 1.5rem 1rem; }
             .app-label{ font-size: 0.7rem; }
+            .footer{ padding: 1.5rem 1rem 1rem 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ─── HEADER ─── -->
-    <header class="header">
-        <div class="site-name">Saleem Deli</div>
-    </header>
+    <!-- ─── എല്ലാം ഉൾക്കൊള്ളുന്ന MAIN CONTENT ─── -->
+    <div class="main-content">
+        
+        <!-- HEADER -->
+        <header class="header">
+            <div class="site-name">Saleem Deli</div>
+        </header>
 
-    <!-- ─── ICON GRID ─── -->
-    <div class="folder-container">
-        <div class="app-grid">
-            <a href="books.html" class="app-item">
-                <div class="app-icon"><i class="fa-solid fa-book"></i></div>
-                <span class="app-label">Books</span>
-            </a>
-
-            <a href="journals.html" class="app-item">
-                <div class="app-icon"><i class="fa-solid fa-book-open"></i></div>
-                <span class="app-label">Journals</span>
-            </a>
-
-            <a href="articles.html" class="app-item">
-                <div class="app-icon"><i class="fa-solid fa-newspaper"></i></div>
-                <span class="app-label">Articles</span>
-            </a>
-
-            <a href="interviews.html" class="app-item">
-                <div class="app-icon"><i class="fa-solid fa-microphone"></i></div>
-                <span class="app-label">Interviews</span>
-            </a>
-
-            <a href="events.html" class="app-item">
-                <div class="app-icon"><i class="fa-solid fa-calendar-days"></i></div>
-                <span class="app-label">Events</span>
-            </a>
-
-            <a href="gallery.html" class="app-item">
-                <div class="app-icon"><i class="fa-solid fa-images"></i></div>
-                <span class="app-label">Gallery</span>
-            </a>
-
-            <a href="contact.html" class="app-item">
-                <div class="app-icon"><i class="fa-solid fa-envelope"></i></div>
-                <span class="app-label">Contact</span>
-            </a>
-
-            <a href="bio.html" class="app-item">
-                <div class="app-icon"><i class="fa-solid fa-user"></i></div>
-                <span class="app-label">Bio</span>
-            </a>
-
-            <!-- 3x3 Grid balance -->
-            <div style="visibility: hidden;"></div>
+        <!-- ICON GRID -->
+        <div class="folder-container">
+            <div class="app-grid">
+                <a href="books.html" class="app-item">
+                    <div class="app-icon"><i class="fa-solid fa-book"></i></div>
+                    <span class="app-label">Books</span>
+                </a>
+                <a href="journals.html" class="app-item">
+                    <div class="app-icon"><i class="fa-solid fa-book-open"></i></div>
+                    <span class="app-label">Journals</span>
+                </a>
+                <a href="articles.html" class="app-item">
+                    <div class="app-icon"><i class="fa-solid fa-newspaper"></i></div>
+                    <span class="app-label">Articles</span>
+                </a>
+                <a href="interviews.html" class="app-item">
+                    <div class="app-icon"><i class="fa-solid fa-microphone"></i></div>
+                    <span class="app-label">Interviews</span>
+                </a>
+                <a href="events.html" class="app-item">
+                    <div class="app-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                    <span class="app-label">Events</span>
+                </a>
+                <a href="gallery.html" class="app-item">
+                    <div class="app-icon"><i class="fa-solid fa-images"></i></div>
+                    <span class="app-label">Gallery</span>
+                </a>
+                <a href="contact.html" class="app-item">
+                    <div class="app-icon"><i class="fa-solid fa-envelope"></i></div>
+                    <span class="app-label">Contact</span>
+                </a>
+                <a href="bio.html" class="app-item">
+                    <div class="app-icon"><i class="fa-solid fa-user"></i></div>
+                    <span class="app-label">Bio</span>
+                </a>
+                <div style="visibility: hidden;"></div>
+            </div>
         </div>
-    </div>
 
-    <!-- ─── FOOTER ─── -->
-    <footer class="footer">
-        <p>© <span id="year"></span> <span>Saleem Deli</span>. All rights reserved.</p>
-    </footer>
+        <!-- SOCIAL MEDIA -->
+        <div class="social-area">
+            <a href="https://www.instagram.com/saleeemshafi" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/share/1GWpuD3oGh/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://wa.me/9656328906" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+
+        <!-- FOOTER (ഉള്ളിൽ തന്നെ, margin-top: auto കൊണ്ട് താഴെ) -->
+        <footer class="footer">
+            <p>© <span id="year"></span> <span>Saleem Deli</span>. All rights reserved.</p>
+        </footer>
+
+    </div>
 
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
