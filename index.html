@@ -9,7 +9,7 @@
     <style>
         *{margin:0;padding:0;box-sizing:border-box;}
         
-        /* ── HTML / BODY (100% ഉയരം നിലനിർത്താൻ) ── */
+        /* ── HTML / BODY ── */
         html, body { height: 100%; }
         body{
             font-family: 'Inter', sans-serif;
@@ -17,16 +17,16 @@
             color: #1e1e1e;
             display: flex;
             flex-direction: column;
-            padding: 0; /* പാഡിംഗ് പൂർണ്ണമായും നീക്കം ചെയ്തു */
+            padding: 0;
         }
 
-        /* ── MAIN CONTENT (പൂർണ്ണ ഉയരം നിറയ്ക്കാൻ) ── */
+        /* ── MAIN CONTENT ── */
         .main-content{
             flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 2rem 1.5rem 0 1.5rem; /* മുകളിലും വശങ്ങളിലും പാഡിംഗ് */
+            padding: 2rem 1.5rem 0 1.5rem;
         }
 
         /* ── Header ── */
@@ -101,7 +101,7 @@
             display: flex;
             justify-content: center;
             gap: 1.5rem;
-            margin: 2rem auto 0 auto;
+            margin: 1rem auto 0 auto;
             max-width: 450px;
             width: 100%;
         }
@@ -115,12 +115,42 @@
             transform: translateY(-2px);
         }
 
-        /* ── Footer (ഇത് main-content-നുള്ളിൽ തന്നെയുണ്ട്) ── */
+        /* 🔥 BIO WRAPPER (വലുതാക്കി, മധ്യത്തിലാക്കി) 🔥 */
+        .bio-wrapper{
+            width: 100%;
+            max-width: 450px;
+            margin: 2rem auto 1rem auto;
+            min-height: 5rem; /* വലിയ ഫോണ്ടിന് അനുസൃതമായി ഉയരം കൂട്ടി */
+            text-align: center; /* ടെക്സ്റ്റ് മധ്യത്തിലാക്കാൻ */
+            padding: 0;
+        }
+        .bio-text{
+            font-size: 1.2rem; /* വലുപ്പം കൂട്ടി */
+            font-weight: 300;
+            color: #5a5a5a;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+        .cursor{
+            display: inline-block;
+            width: 2px;
+            height: 1.2rem; /* ഫോണ്ട് വലുപ്പത്തിന് അനുസരിച്ച് കഴ്സർ ഉയരം കൂട്ടി */
+            background-color: #5a5a5a;
+            margin-left: 2px;
+            vertical-align: text-bottom;
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* ── Footer ── */
         .footer{
             width: 100%;
             margin-top: auto; /* ഫൂട്ടറിനെ ഏറ്റവും താഴെ എത്തിക്കും */
             text-align: center;
-            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            padding: 1rem 1.5rem 1.5rem 1.5rem;
             font-size: 0.85rem;
             font-weight: 300;
             color: #8a8a8a;
@@ -134,17 +164,17 @@
         /* ── Responsive ── */
         @media(max-width: 480px){
             .main-content{ padding: 1.5rem 1rem 0 1rem; }
-            .header, .folder-container, .social-area{ max-width: 100%; }
+            .header, .folder-container, .bio-wrapper, .social-area{ max-width: 100%; }
             .app-icon{ width: 60px; height: 60px; font-size: 1.6rem; border-radius: 16px; }
             .app-grid{ gap: 1.5rem 1rem; }
             .app-label{ font-size: 0.7rem; }
-            .footer{ padding: 1.5rem 1rem 1rem 1rem; }
+            .footer{ padding: 0.8rem 1rem 1.5rem 1.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ─── എല്ലാം ഉൾക്കൊള്ളുന്ന MAIN CONTENT ─── -->
+    <!-- ─── MAIN CONTENT ─── -->
     <div class="main-content">
         
         <!-- HEADER -->
@@ -198,7 +228,13 @@
             <a href="https://wa.me/9656328906" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
         </div>
 
-        <!-- FOOTER (ഉള്ളിൽ തന്നെ, margin-top: auto കൊണ്ട് താഴെ) -->
+        <!-- 🔥 TYPING BIO (LINE BY LINE, BIGGER & CENTERED) 🔥 -->
+        <div class="bio-wrapper">
+            <span class="bio-text" id="typingText"></span>
+            <span class="cursor" id="cursor"></span>
+        </div>
+
+        <!-- FOOTER -->
         <footer class="footer">
             <p>© <span id="year"></span> <span>Saleem Deli</span>. All rights reserved.</p>
         </footer>
@@ -206,7 +242,38 @@
     </div>
 
     <script>
+        // ── FOOTER YEAR ──
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // ── LINE-BY-LINE TYPING EFFECT ──
+        const lines = [
+            "-Saleem Ahamed Shafi",
+            "-Deli, Kalanad PO",
+            "-Kasaragod, Kerala"
+        ];
+
+        let lineIndex = 0;
+        let charIndex = 0;
+        const element = document.getElementById('typingText');
+
+        function typeLine() {
+            if (lineIndex < lines.length) {
+                const currentLine = lines[lineIndex];
+                
+                if (charIndex <= currentLine.length) {
+                    element.textContent = lines.slice(0, lineIndex).join('\n') + '\n' + currentLine.substring(0, charIndex);
+                    charIndex++;
+                    setTimeout(typeLine, 40); // Typing speed
+                } else {
+                    charIndex = 0;
+                    lineIndex++;
+                    setTimeout(typeLine, 400); // Pause between lines
+                }
+            }
+        }
+
+        // Start typing when page loads
+        window.onload = typeLine;
     </script>
 </body>
 </html>
