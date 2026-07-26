@@ -1,0 +1,15 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/bio", "destination": "/bio.html" },
+    { "source": "/books", "destination": "/books.html" },
+    { "source": "/journals", "destination": "/journals.html" },
+    { "source": "/articles", "destination": "/articles.html" },
+    { "source": "/interviews", "destination": "/interviews.html" },
+    { "source": "/events", "destination": "/events.html" },
+    { "source": "/gallery", "destination": "/gallery.html" },
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/admin", "destination": "/admin.html" },
+    { "source": "/archives", "destination": "/archives.html" }
+  ]
+}
