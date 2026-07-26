@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Archives · Saleem Deli</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        /* ── RESET & BASE ── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #faf9f7;
+            color: #1e1e1e;
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ── HEADER ── */
+        .header {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            background: #faf9f7;
+            position: relative;
+            z-index: 10;
+            width: 100%;
+        }
+
+        .site-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #1e1e1e;
+            transition: color 0.2s;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 1.75rem;
+        }
+
+        .nav a {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #3a3a3a;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 1.5px;
+            background: #1e1e1e;
+            transition: width 0.25s ease;
+        }
+
+        .nav a:hover {
+            color: #000;
+        }
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        /* ── HAMBURGER ── */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+            z-index: 20;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background: #1e1e1e;
+            border-radius: 2px;
+            transition: 0.25s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* 🔥 MOBILE NAV (1500px വരെ) 🔥 */
+        @media (max-width: 1500px) {
+            .hamburger {
+                display: flex !important;
+            }
+
+            .nav {
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 100%;
+                max-width: 340px;
+                height: 100vh;
+                background: #faf9f7;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 6rem 2.5rem 2.5rem 2.5rem;
+                gap: 1.25rem;
+                box-shadow: -8px 0 30px rgba(0, 0, 0, 0.04);
+                transform: translateX(100%);
+                transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                border-left: 1px solid rgba(0, 0, 0, 0.04);
+                overflow-y: auto;
+                display: flex !important;
+            }
+
+            .nav.open {
+                transform: translateX(0);
+            }
+
+            .nav a {
+                font-size: 1.1rem;
+                font-weight: 400;
+                width: 100%;
+                padding: 0.3rem 0;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            }
+
+            .nav a::after {
+                display: none;
+            }
+
+            .backdrop {
+                display: none;
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.08);
+                z-index: 5;
+                backdrop-filter: blur(2px);
+            }
+            .backdrop.visible {
+                display: block;
+            }
+
+            .header {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .site-name {
+                font-size: 1.25rem;
+            }
+            .nav {
+                max-width: 280px;
+                padding: 5rem 1.75rem 1.75rem 1.75rem;
+            }
+        }
+
+        /* ── MAIN ── */
+        .main {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 4rem 2rem 2rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
+            color: #1e1e1e;
+        }
+
+        .page-sub {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: #5a5a5a;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            padding-bottom: 1.5rem;
+        }
+
+        /* ── DYNAMIC ARCHIVE GRID CONTAINER ── */
+        .archive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        .archive-card {
+            background: #f0efec;
+            border-radius: 16px;
+            padding: 1.8rem 1.5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: background-color 0.25s, transform 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .archive-card:hover {
+            background: #e8e6e1;
+            transform: translateY(-3px);
+        }
+
+        .archive-card img {
+            width: 140px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+            margin-bottom: 1.2rem;
+        }
+
+        .archive-card h3 {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #1e1e1e;
+            margin-bottom: 0.3rem;
+            line-height: 1.3;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+
+        .archive-card .pub-date {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: #7a7a7a;
+            margin-bottom: 0.6rem;
+        }
+
+        .archive-card .desc {
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: #5a5a5a;
+            margin-bottom: 1.2rem;
+            line-height: 1.4;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+
+        .archive-card .btn {
+            display: inline-block;
+            padding: 0.5rem 1.4rem;
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: #1e1e1e;
+            border: 1px solid #1e1e1e;
+            border-radius: 30px;
+            transition: all 0.25s ease;
+            width: fit-content;
+            background: transparent;
+            cursor: pointer;
+            margin-top: auto;
+        }
+
+        .archive-card .btn:hover {
+            background: #1e1e1e;
+            color: #faf9f7;
+            transform: translateY(-1px);
+        }
+
+        /* ── CONTACT CTA SECTION ── */
+        .contact-cta {
+            margin-top: 4rem;
+            padding: 3rem 2rem;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-cta h2 {
+            font-weight: 300;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #1e1e1e;
+        }
+
+        .contact-cta p {
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: #5a5a5a;
+            margin-bottom: 1.5rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 0.7rem 2.5rem;
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: #1e1e1e;
+            border: 1px solid #1e1e1e;
+            border-radius: 30px;
+            background: transparent;
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+
+        .cta-btn:hover {
+            background: #1e1e1e;
+            color: #faf9f7;
+            transform: translateY(-1px);
+        }
+
+        /* ── GRID RESPONSIVENESS ── */
+        @media (max-width: 1000px) {
+            .archive-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 720px) {
+            .archive-grid {
+                grid-template-columns: 1fr;
+            }
+            .archive-card img {
+                width: 110px;
+                height: 160px;
+            }
+            .page-title {
+                font-size: 2rem;
+            }
+            .main {
+                padding: 2.5rem 1.5rem 1.5rem;
+            }
+            .header, .main, .footer { max-width: 100%; }
+            .header { padding: 1rem 1.5rem; }
+            .contact-cta {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* 🔥 UPDATED: FULL-WIDTH FOOTER 🔥 */
+        .footer {
+            width: 100%;
+            margin: 0 auto;
+            padding: 2rem 2rem 2.5rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: #8a8a8a;
+            letter-spacing: 0.01em;
+        }
+        .footer span {
+            color: #1e1e1e;
+            font-weight: 400;
+        }
+
+        @media (max-width: 720px) {
+            .footer {
+                padding: 1.5rem 1.5rem 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ─── BACKDROP (MOBILE) ─── -->
+    <div class="backdrop" id="backdrop"></div>
+
+    <!-- ─── HEADER ─── -->
+    <header class="header">
+        <a href="index.html" class="site-name">Saleem Deli</a>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+        <nav class="nav" id="nav">
+            <a href="index.html">Home</a>
+            <a href="bio.html">Bio</a>
+            <a href="books.html">Books</a>
+            <a href="journals.html">Journals</a>
+            <a href="articles.html">Articles</a>
+            <a href="interviews.html">Interviews</a>
+            <a href="events.html">Events</a>
+            <a href="gallery.html">Gallery</a>
+            <!-- 🔥 NEW ARCHIVES LINK 🔥 -->
+            <a href="archives.html">Archives</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <!-- ─── MAIN ─── -->
+    <main class="main">
+        <h1 class="page-title">Archives</h1>
+        <p class="page-sub">A curated collection of valuable old newspaper clippings, preserved through time.</p>
+
+        <!-- 🔥 DYNAMIC ARCHIVAL GRID (Loaded via JS) 🔥 -->
+        <div class="archive-grid" id="container">
+            <!-- JavaScript വഴി കാർഡുകൾ ഇവിടെ ലോഡ് ആകും -->
+        </div>
+
+        <!-- CONTACT CTA SECTION -->
+        <section class="contact-cta">
+            <h2>Interested in these archives?</h2>
+            <p>If you'd like to know more about these historic newspaper clippings, or wish to acquire a copy, feel free to reach out.</p>
+            <a href="contact.html" class="cta-btn">Contact Us →</a>
+        </section>
+
+    </main>
+
+    <!-- ─── FOOTER ─── -->
+    <footer class="footer">
+        <p>© <span id="year"></span> <span>Saleem Deli</span>. All rights reserved.</p>
+    </footer>
+
+    <!-- ─── FIREBASE SDK (CDN) ─── -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // ── Hamburger Logic ──
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
+        const backdrop = document.getElementById('backdrop');
+
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('open');
+            hamburger.classList.toggle('active');
+            backdrop.classList.toggle('visible');
+            document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+        });
+
+        backdrop.addEventListener('click', () => {
+            nav.classList.remove('open');
+            hamburger.classList.remove('active');
+            backdrop.classList.remove('visible');
+            document.body.style.overflow = '';
+        });
+
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('open');
+                hamburger.classList.remove('active');
+                backdrop.classList.remove('visible');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // ── FIREBASE CONFIG ──
+        const firebaseConfig = {
+            apiKey: "AIzaSyANtBgdTdRm3KTprwVDTl-ZEXmJBhpD6-0",
+            authDomain: "saleemdeli-65e3f.firebaseapp.com",
+            projectId: "saleemdeli-65e3f",
+            storageBucket: "saleemdeli-65e3f.firebasestorage.app",
+            messagingSenderId: "749131046750",
+            appId: "1:749131046750:web:3a82ae0527291e608279cf",
+            measurementId: "G-MY03REM2PP"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // ── LOAD ARCHIVES FROM FIRESTORE ──
+        async function loadArchives() {
+            const container = document.getElementById('container');
+            container.innerHTML = '<p style="color:#5a5a5a;text-align:center;padding:2rem;">⏳ Loading...</p>';
+            try {
+                const snap = await db.collection('archives').orderBy('timestamp', 'desc').get();
+                if (snap.empty) {
+                    container.innerHTML = "<p style='color:#5a5a5a;text-align:center;padding:2rem;'>No archives added yet.</p>";
+                    return;
+                }
+                container.innerHTML = '';
+                snap.forEach(doc => {
+                    const data = doc.data();
+                    const card = document.createElement('div');
+                    card.className = 'archive-card';
+                    card.innerHTML = `
+                        <img src="${data.image}" alt="${data.title}" />
+                        <h3>${data.title}</h3>
+                        <div class="pub-date">Published: ${data.date || ''}</div>
+                        <p class="desc">${data.desc || ''}</p>
+                        <button class="btn" onclick="window.location.href='contact.html'">Inquire →</button>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch (e) {
+                console.error(e);
+                container.innerHTML = "<p style='color:#c62828;text-align:center;padding:2rem;'>Error loading data.</p>";
+            }
+        }
+        loadArchives();
+
+        // ── Footer Year ──
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+</body>
+</html>
