@@ -97,6 +97,7 @@
                 <li><a href="#" data-target="events">📅 Events</a></li>
                 <li><a href="#" data-target="interviews">🎤 Interviews</a></li>
                 <li><a href="#" data-target="gallery">🖼️ Gallery</a></li>
+                <li><a href="#" data-target="archives">📰 Archives</a></li> <!-- 🔥 NEW: Archives Link -->
             </ul>
             <button class="logout-btn" id="logoutBtn">🚪 Logout</button>
         </div>
@@ -165,7 +166,7 @@
                 </div>
             </div>
 
-            <!-- EVENTS FORM (UPDATED WITH DATE & TIME) -->
+            <!-- EVENTS FORM -->
             <div id="events" class="admin-form-section">
                 <div class="form-container">
                     <h2 style="font-weight:300;font-size:1.5rem;margin-bottom:0.2rem;">Add a New Event</h2>
@@ -173,10 +174,7 @@
                     <form id="eventForm">
                         <div class="form-group"><label>Title</label><input type="text" id="e-title" required/></div>
                         <div class="form-group"><label>Image URL</label><input type="text" id="e-image" required/></div>
-                        
-                        <!-- 🔥 UPDATED: Date & Time Picker 🔥 -->
                         <div class="form-group"><label>Date & Time</label><input type="datetime-local" id="e-date" required/></div>
-                        
                         <div class="form-group"><label>Location</label><input type="text" id="e-location" required/></div>
                         <div class="form-group"><label>Description</label><input type="text" id="e-desc"/></div>
                         <div class="form-group"><label>Register Link</label><input type="url" id="e-link" required/></div>
@@ -224,6 +222,25 @@
                     <div id="g-msg" class="msg"></div>
                     <h3 style="margin-top:2rem;font-weight:400;font-size:1rem;">Current Images</h3>
                     <div id="g-list" class="item-list"></div>
+                </div>
+            </div>
+
+            <!-- 🔥 NEW: ARCHIVES FORM & LIST 🔥 -->
+            <div id="archives" class="admin-form-section">
+                <div class="form-container">
+                    <h2 style="font-weight:300;font-size:1.5rem;margin-bottom:0.2rem;">Add a New Archive</h2>
+                    <div class="sub" style="border-bottom:none;padding-bottom:0.5rem;">Fill in the details below.</div>
+                    <form id="archiveForm">
+                        <div class="form-group"><label>Title (Newspaper Name)</label><input type="text" id="ar-title" required/></div>
+                        <div class="form-group"><label>Image URL</label><input type="text" id="ar-image" required/></div>
+                        <div class="form-group"><label>Published Date</label><input type="text" id="ar-date" placeholder="e.g. March 1985" required/></div>
+                        <div class="form-group"><label>Description</label><input type="text" id="ar-desc" placeholder="A brief description..."/></div>
+                        <button type="submit" class="btn" id="ar-submit">Add Archive →</button>
+                        <button type="button" class="btn cancel-edit-btn" id="ar-cancel">Cancel</button>
+                    </form>
+                    <div id="ar-msg" class="msg"></div>
+                    <h3 style="margin-top:2rem;font-weight:400;font-size:1rem;">Current Archives</h3>
+                    <div id="ar-list" class="item-list"></div>
                 </div>
             </div>
 
@@ -327,7 +344,8 @@
                 'articles': { btn: 'a-submit', cancel: 'a-cancel' },
                 'events': { btn: 'e-submit', cancel: 'e-cancel' },
                 'interviews': { btn: 'i-submit', cancel: 'i-cancel' },
-                'gallery': { btn: 'g-submit', cancel: 'g-cancel' }
+                'gallery': { btn: 'g-submit', cancel: 'g-cancel' },
+                'archives': { btn: 'ar-submit', cancel: 'ar-cancel' } // 🔥 NEW: Archives mapping
             };
 
             async function handleSubmit(formId, msgId, collectionName, getDataFn) {
@@ -395,11 +413,11 @@
                 desc: document.getElementById('a-desc').value,
                 content: document.getElementById('a-content').value
             }));
-            // Events (UPDATED TO USE datetime-local VALUE)
+            // Events
             handleSubmit('eventForm', 'e-msg', 'events', () => ({
                 title: document.getElementById('e-title').value,
                 image: document.getElementById('e-image').value,
-                date: document.getElementById('e-date').value, // ✅ ISO datetime string YYYY-MM-DDTHH:mm
+                date: document.getElementById('e-date').value,
                 location: document.getElementById('e-location').value,
                 desc: document.getElementById('e-desc').value,
                 link: document.getElementById('e-link').value
@@ -417,6 +435,14 @@
             handleSubmit('galleryForm', 'g-msg', 'gallery', () => ({
                 image: document.getElementById('g-image').value,
                 caption: document.getElementById('g-caption').value
+            }));
+
+            // 🔥 NEW: Archives
+            handleSubmit('archiveForm', 'ar-msg', 'archives', () => ({
+                title: document.getElementById('ar-title').value,
+                image: document.getElementById('ar-image').value,
+                date: document.getElementById('ar-date').value,
+                desc: document.getElementById('ar-desc').value
             }));
         }
 
@@ -477,15 +503,18 @@
                 'articles': ['a-title', 'a-image', 'a-sub', 'a-desc', 'a-content'],
                 'events': ['e-title', 'e-image', 'e-date', 'e-location', 'e-desc', 'e-link'],
                 'interviews': ['i-title', 'i-image', 'i-with', 'i-location', 'i-desc', 'i-link'],
-                'gallery': ['g-image', 'g-caption']
+                'gallery': ['g-image', 'g-caption'],
+                'archives': ['ar-title', 'ar-image', 'ar-date', 'ar-desc'] // 🔥 NEW: Archives inputs
             };
             const btnMap = {
                 'books': 'b-submit', 'journals': 'j-submit', 'articles': 'a-submit',
-                'events': 'e-submit', 'interviews': 'i-submit', 'gallery': 'g-submit'
+                'events': 'e-submit', 'interviews': 'i-submit', 'gallery': 'g-submit',
+                'archives': 'ar-submit' // 🔥 NEW: Archives button
             };
             const cancelMap = {
                 'books': 'b-cancel', 'journals': 'j-cancel', 'articles': 'a-cancel',
-                'events': 'e-cancel', 'interviews': 'i-cancel', 'gallery': 'g-cancel'
+                'events': 'e-cancel', 'interviews': 'i-cancel', 'gallery': 'g-cancel',
+                'archives': 'ar-cancel' // 🔥 NEW: Archives cancel
             };
 
             // Cancel any previous edit
@@ -519,6 +548,7 @@
             loadItems('events', 'e-list', 'title');
             loadItems('interviews', 'i-list', 'title');
             loadItems('gallery', 'g-list', 'caption');
+            loadItems('archives', 'ar-list', 'title'); // 🔥 NEW: Load Archives
         }
 
         initTabs(); 
