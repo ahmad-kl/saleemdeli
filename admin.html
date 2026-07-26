@@ -166,7 +166,7 @@
                 </div>
             </div>
 
-            <!-- EVENTS FORM -->
+            <!-- ✅ UPDATED EVENTS FORM (Location Optional) -->
             <div id="events" class="admin-form-section">
                 <div class="form-container">
                     <h2 style="font-weight:300;font-size:1.5rem;margin-bottom:0.2rem;">Add a New Event</h2>
@@ -174,8 +174,11 @@
                     <form id="eventForm">
                         <div class="form-group"><label>Title</label><input type="text" id="e-title" required/></div>
                         <div class="form-group"><label>Image URL</label><input type="text" id="e-image" required/></div>
+                        
                         <div class="form-group"><label>Date & Time</label><input type="datetime-local" id="e-date" required/></div>
-                        <div class="form-group"><label>Location</label><input type="text" id="e-location" required/></div>
+                        
+                        <div class="form-group"><label>Location</label><input type="text" id="e-location" placeholder="e.g. Powell's Books, Portland" /></div> <!-- 🔥 'required' നീക്കം ചെയ്തു -->
+                        
                         <div class="form-group"><label>Description</label><input type="text" id="e-desc"/></div>
                         <div class="form-group"><label>Register Link</label><input type="url" id="e-link" required/></div>
                         <button type="submit" class="btn" id="e-submit">Add Event →</button>
@@ -208,14 +211,14 @@
                 </div>
             </div>
 
-            <!-- ✅ UPDATED GALLERY (Caption NOT required) -->
+            <!-- ✅ UPDATED GALLERY (Caption Optional) -->
             <div id="gallery" class="admin-form-section">
                 <div class="form-container">
                     <h2 style="font-weight:300;font-size:1.5rem;margin-bottom:0.2rem;">Add a New Image</h2>
                     <div class="sub" style="border-bottom:none;padding-bottom:0.5rem;">Fill in the details below.</div>
                     <form id="galleryForm">
                         <div class="form-group"><label>Image URL</label><input type="text" id="g-image" required/></div>
-                        <div class="form-group"><label>Caption</label><input type="text" id="g-caption" placeholder="e.g. Book cover draft" /></div> <!-- 🔥 ഇവിടെ 'required' നീക്കം ചെയ്തു -->
+                        <div class="form-group"><label>Caption</label><input type="text" id="g-caption" placeholder="e.g. Book cover draft" /></div>
                         <button type="submit" class="btn" id="g-submit">Add Image →</button>
                         <button type="button" class="btn cancel-edit-btn" id="g-cancel">Cancel</button>
                     </form>
@@ -225,7 +228,7 @@
                 </div>
             </div>
 
-            <!-- 🔥 NEW: ARCHIVES FORM & LIST 🔥 -->
+            <!-- ARCHIVES -->
             <div id="archives" class="admin-form-section">
                 <div class="form-container">
                     <h2 style="font-weight:300;font-size:1.5rem;margin-bottom:0.2rem;">Add a New Archive</h2>
@@ -413,12 +416,12 @@
                 desc: document.getElementById('a-desc').value,
                 content: document.getElementById('a-content').value
             }));
-            // Events
+            // Events (Location Optional)
             handleSubmit('eventForm', 'e-msg', 'events', () => ({
                 title: document.getElementById('e-title').value,
                 image: document.getElementById('e-image').value,
                 date: document.getElementById('e-date').value,
-                location: document.getElementById('e-location').value,
+                location: document.getElementById('e-location').value || '', // 🔥 ശൂന്യമാണെങ്കിൽ empty string
                 desc: document.getElementById('e-desc').value,
                 link: document.getElementById('e-link').value
             }));
@@ -431,10 +434,10 @@
                 desc: document.getElementById('i-desc').value,
                 link: document.getElementById('i-link').value
             }));
-            // Gallery (Caption is optional now)
+            // Gallery (Caption Optional)
             handleSubmit('galleryForm', 'g-msg', 'gallery', () => ({
                 image: document.getElementById('g-image').value,
-                caption: document.getElementById('g-caption').value || '' // ശൂന്യമാണെങ്കിൽ empty string ആയി സേവ് ചെയ്യും
+                caption: document.getElementById('g-caption').value || ''
             }));
             // Archives
             handleSubmit('archiveForm', 'ar-msg', 'archives', () => ({
