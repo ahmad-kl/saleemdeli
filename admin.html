@@ -42,7 +42,7 @@
         .form-container{max-width:600px;background:#fff;padding:2.5rem;border-radius:20px;box-shadow:0 8px 30px rgba(0,0,0,0.04);}
         .form-group{margin-bottom:1.5rem;}
         label{display:block;font-size:0.85rem;font-weight:400;color:#4a4a4a;margin-bottom:0.4rem;}
-        input[type="text"], input[type="url"], input[type="email"], input[type="password"]{width:100%;padding:0.8rem 1rem;font-family:Inter;font-size:0.95rem;font-weight:300;border:1px solid #d0d0d0;border-radius:8px;outline:none;transition:border-color 0.2s;background:#faf9f7;}
+        input[type="text"], input[type="url"], input[type="email"], input[type="password"], input[type="datetime-local"]{width:100%;padding:0.8rem 1rem;font-family:Inter;font-size:0.95rem;font-weight:300;border:1px solid #d0d0d0;border-radius:8px;outline:none;transition:border-color 0.2s;background:#faf9f7;}
         input:focus{border-color:#1e1e1e;}
         .btn{display:inline-block;padding:0.7rem 2.5rem;font-size:0.95rem;font-weight:400;color:#1e1e1e;border:1px solid #1e1e1e;border-radius:30px;background:transparent;cursor:pointer;transition:all 0.25s ease;margin-top:0.5rem;}
         .btn:hover{background:#1e1e1e;color:#faf9f7;transform:translateY(-1px);}
@@ -54,15 +54,10 @@
         .list-item{display:flex;justify-content:space-between;align-items:center;background:#faf9f7;padding:0.8rem 1.2rem;border-radius:8px;border:1px solid #e8e6e1;}
         .list-item .title{font-weight:400;color:#1e1e1e;}
         .list-item .actions{display:flex;gap:0.5rem;}
-        
-        /* NEW: Edit Button Style */
         .edit-btn{background:none;border:none;color:#1e1e1e;cursor:pointer;font-size:1rem;transition:transform 0.2s;padding:0 0.5rem;}
         .edit-btn:hover{transform:scale(1.1);color:#2e7d32;}
-        
         .del-btn{background:none;border:none;color:#c62828;cursor:pointer;font-size:1rem;transition:transform 0.2s;}
         .del-btn:hover{transform:scale(1.1);}
-        
-        /* Cancel button */
         .cancel-edit-btn{display:none; margin-left:10px; background:#e8e6e1; border:1px solid #d0d0d0;}
 
         @media(max-width:768px){
@@ -170,15 +165,18 @@
                 </div>
             </div>
 
-            <!-- EVENTS -->
+            <!-- EVENTS FORM (UPDATED WITH DATE & TIME) -->
             <div id="events" class="admin-form-section">
                 <div class="form-container">
                     <h2 style="font-weight:300;font-size:1.5rem;margin-bottom:0.2rem;">Add a New Event</h2>
-                    <div class="sub" style="border-bottom:none;padding-bottom:0.5rem;">Fill in the details below.</div>
+                    <div class="sub" style="border-bottom:none;padding-bottom:0.5rem;">Fill in the details below. Use the calendar & time picker.</div>
                     <form id="eventForm">
                         <div class="form-group"><label>Title</label><input type="text" id="e-title" required/></div>
                         <div class="form-group"><label>Image URL</label><input type="text" id="e-image" required/></div>
-                        <div class="form-group"><label>Date</label><input type="text" id="e-date" required/></div>
+                        
+                        <!-- 🔥 UPDATED: Date & Time Picker 🔥 -->
+                        <div class="form-group"><label>Date & Time</label><input type="datetime-local" id="e-date" required/></div>
+                        
                         <div class="form-group"><label>Location</label><input type="text" id="e-location" required/></div>
                         <div class="form-group"><label>Description</label><input type="text" id="e-desc"/></div>
                         <div class="form-group"><label>Register Link</label><input type="url" id="e-link" required/></div>
@@ -397,11 +395,11 @@
                 desc: document.getElementById('a-desc').value,
                 content: document.getElementById('a-content').value
             }));
-            // Events
+            // Events (UPDATED TO USE datetime-local VALUE)
             handleSubmit('eventForm', 'e-msg', 'events', () => ({
                 title: document.getElementById('e-title').value,
                 image: document.getElementById('e-image').value,
-                date: document.getElementById('e-date').value,
+                date: document.getElementById('e-date').value, // ✅ ISO datetime string YYYY-MM-DDTHH:mm
                 location: document.getElementById('e-location').value,
                 desc: document.getElementById('e-desc').value,
                 link: document.getElementById('e-link').value
