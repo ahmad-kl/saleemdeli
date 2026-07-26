@@ -208,13 +208,58 @@
             border-bottom: 1px solid rgba(0, 0, 0, 0.04);
             padding-bottom: 1.5rem;
         }
+        
+        /* 🔥 TABS FOR UPCOMING & PAST 🔥 */
+        .tab-container {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            padding-bottom: 0.5rem;
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            color: #7a7a7a;
+            cursor: pointer;
+            padding: 0.3rem 0.2rem;
+            transition: all 0.2s ease;
+            position: relative;
+            letter-spacing: 0.02em;
+        }
+        .tab-btn::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -0.5rem;
+            width: 0;
+            height: 2px;
+            background-color: #1e1e1e;
+            transition: width 0.3s ease;
+        }
+        .tab-btn:hover {
+            color: #1e1e1e;
+        }
+        .tab-btn.active {
+            color: #1e1e1e;
+            font-weight: 500;
+        }
+        .tab-btn.active::after {
+            width: 100%;
+        }
 
-        /* 🔥 REPLACED HORIZONTAL SCROLL WITH VERTICAL GRID 🔥 */
+        /* 🔥 VERTICAL GRIDS (UPCOMING & PAST) 🔥 */
         .events-grid {
-            display: grid;
+            display: none;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 2rem;
             padding-bottom: 2rem;
+        }
+        .events-grid.active {
+            display: grid;
         }
 
         /* ── CARD ── */
@@ -375,10 +420,22 @@
     <!-- ─── main ─── -->
     <main class="main">
         <h1 class="page-title">Events</h1>
+        <p class="page-sub">Upcoming and past events — readings, workshops, and more.</p>
         
-        <!-- 🔥 REPLACED HORIZONTAL SCROLL CONTAINER WITH VERTICAL GRID 🔥 -->
-        <div class="events-grid" id="container">
-            <!-- ഇവിടെ JavaScript വഴി കാർഡുകൾ വരും -->
+        <!-- 🔥 TABS 🔥 -->
+        <div class="tab-container">
+            <button class="tab-btn active" data-target="upcoming">Upcoming Events</button>
+            <button class="tab-btn" data-target="past">Past Events</button>
+        </div>
+
+        <!-- 🔥 UPCOMING EVENTS GRID 🔥 -->
+        <div id="upcoming" class="events-grid active">
+            <!-- JS വഴി കാർഡുകൾ ഇവിടെ ലോഡ് ആകും -->
+        </div>
+
+        <!-- 🔥 PAST EVENTS GRID 🔥 -->
+        <div id="past" class="events-grid">
+            <!-- JS വഴി കാർഡുകൾ ഇവിടെ ലോഡ് ആകും -->
         </div>
     </main>
 
@@ -435,16 +492,45 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
+        // ── TAB SWITCHING LOGIC ──
+        const tabs = document.querySelectorAll('.tab-btn');
+        const grids = {
+            upcoming: document.getElementById('upcoming'),
+            past: document.getElementById('past')
+        };
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                tabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                Object.values(grids).forEach(g => g.classList.remove('active'));
+                const target = this.getAttribute('data-target');
+                grids[target].classList.add('active');
+            });
+        });
+
         // ── LOAD EVENTS FROM FIRESTORE ──
         async function load() {
-            const container = document.getElementById('container');
-            container.innerHTML = '';
+            const upcomingContainer = document.getElementById('upcoming');
+            const pastContainer = document.getElementById('past');
+            upcomingContainer.innerHTML = '<p style="color:#5a5a5a;text-align:center;padding:2rem;">⏳ Loading...</p>';
+            pastContainer.innerHTML = '<p style="color:#5a5a5a;text-align:center;padding:2rem;">⏳ Loading...</p>';
+            
             try {
                 const snap = await db.collection('events').orderBy('timestamp', 'desc').get();
                 if (snap.empty) {
-                    container.innerHTML = "<p style='color:#5a5a5a;text-align:center;padding:2rem;'>No events added yet.</p>";
+                    upcomingContainer.innerHTML = "<p style='color:#5a5a5a;text-align:center;padding:2rem;'>No upcoming events yet.</p>";
+                    pastContainer.innerHTML = "<p style='color:#5a5a5a;text-align:center;padding:2rem;'>No past events yet.</p>";
                     return;
                 }
+
+                // Clear containers
+                upcomingContainer.innerHTML = '';
+                pastContainer.innerHTML = '';
+
+                // Get current date & time
+                const now = new Date();
+
                 snap.forEach(doc => {
                     const data = doc.data();
                     const card = document.createElement('div');
@@ -457,11 +543,25 @@
                             <p class="desc">${data.desc || ''}</p>
                             <a href="${data.link}" target="_blank" class="btn">Register →</a>
                         `;
-                    container.appendChild(card);
+
+                    // 🔥 Compare Date & Time
+                    if (data.date) {
+                        const eventTime = new Date(data.date);
+                        // If event date/time is in the past, put it in Past Events
+                        if (eventTime < now) {
+                            pastContainer.appendChild(card);
+                        } else {
+                            upcomingContainer.appendChild(card);
+                        }
+                    } else {
+                        // If no date provided, default to upcoming
+                        upcomingContainer.appendChild(card);
+                    }
                 });
             } catch (e) {
                 console.error(e);
-                container.innerHTML = "<p style='color:#c62828;text-align:center;padding:2rem;'>Error loading data.</p>";
+                document.getElementById('upcoming').innerHTML = "<p style='color:#c62828;text-align:center;padding:2rem;'>Error loading data.</p>";
+                document.getElementById('past').innerHTML = "<p style='color:#c62828;text-align:center;padding:2rem;'>Error loading data.</p>";
             }
         }
         load();
