@@ -109,14 +109,14 @@
             <div id="books" class="admin-form-section active">
                 <div class="form-container">
                     <h2 style="font-weight:300;font-size:1.5rem;margin-bottom:0.2rem;">Add a New Book</h2>
-                    <div class="sub" style="border-bottom:none;padding-bottom:0.5rem;">Fill in the details below.</div>
+                    <div class="sub" style="border-bottom:none;padding-bottom:0.5rem;">Fill in the details below. All fields are optional.</div>
                     <form id="bookForm">
-                        <div class="form-group"><label>Title</label><input type="text" id="b-title" required/></div>
-                        <div class="form-group"><label>Image URL</label><input type="text" id="b-image" required/></div>
-                        <div class="form-group"><label>Subtitle</label><input type="text" id="b-sub"/></div>
-                        <div class="form-group"><label>Description</label><input type="text" id="b-desc"/></div>
-                        <div class="form-group"><label>Buy Link</label><input type="url" id="b-link" required/></div>
-                        <div class="form-group"><label>Price</label><input type="text" id="b-price"/></div>
+                        <div class="form-group"><label>Title</label><input type="text" id="b-title" placeholder="e.g. The Fragile Shore" /></div>
+                        <div class="form-group"><label>Image URL</label><input type="text" id="b-image" placeholder="https://... or image.jpg" /></div>
+                        <div class="form-group"><label>Subtitle</label><input type="text" id="b-sub" placeholder="e.g. Essays on coastal ecology" /></div>
+                        <div class="form-group"><label>Description</label><input type="text" id="b-desc" placeholder="A collection of deep reflections..." /></div>
+                        <div class="form-group"><label>Buy Link</label><input type="url" id="b-link" placeholder="https://..." /></div>
+                        <div class="form-group"><label>Price</label><input type="text" id="b-price" placeholder="e.g. ₹450 or $20" /></div>
                         <button type="submit" class="btn" id="b-submit">Add Book →</button>
                         <button type="button" class="btn cancel-edit-btn" id="b-cancel">Cancel</button>
                     </form>
@@ -130,13 +130,13 @@
             <div id="journals" class="admin-form-section">
                 <div class="form-container">
                     <h2 style="font-weight:300;font-size:1.5rem;margin-bottom:0.2rem;">Add a New Journal</h2>
-                    <div class="sub" style="border-bottom:none;padding-bottom:0.5rem;">Fill in the details below.</div>
+                    <div class="sub" style="border-bottom:none;padding-bottom:0.5rem;">Fill in the details below. All fields are optional.</div>
                     <form id="journalForm">
-                        <div class="form-group"><label>Title</label><input type="text" id="j-title" required/></div>
-                        <div class="form-group"><label>Image URL</label><input type="text" id="j-image" required/></div>
-                        <div class="form-group"><label>Subtitle</label><input type="text" id="j-sub"/></div>
-                        <div class="form-group"><label>Description</label><input type="text" id="j-desc"/></div>
-                        <div class="form-group"><label>Buy Link</label><input type="url" id="j-link" required/></div>
+                        <div class="form-group"><label>Title</label><input type="text" id="j-title" placeholder="e.g. Field Notes Vol. IV" /></div>
+                        <div class="form-group"><label>Image URL</label><input type="text" id="j-image" placeholder="https://... or image.jpg" /></div>
+                        <div class="form-group"><label>Subtitle</label><input type="text" id="j-sub" placeholder="e.g. Issue No. 9" /></div>
+                        <div class="form-group"><label>Description</label><input type="text" id="j-desc" placeholder="A brief description..." /></div>
+                        <div class="form-group"><label>Buy Link</label><input type="url" id="j-link" placeholder="https://..." /></div>
                         <button type="submit" class="btn" id="j-submit">Add Journal →</button>
                         <button type="button" class="btn cancel-edit-btn" id="j-cancel">Cancel</button>
                     </form>
@@ -150,12 +150,12 @@
             <div id="articles" class="admin-form-section">
                 <div class="form-container">
                     <h2 style="font-weight:300;font-size:1.5rem;margin-bottom:0.2rem;">Add a New Article</h2>
-                    <div class="sub" style="border-bottom:none;padding-bottom:0.5rem;">Fill in the details below. Image URL + Full Text Content required.</div>
+                    <div class="sub" style="border-bottom:none;padding-bottom:0.5rem;">Fill in the details below. All fields are optional.</div>
                     <form id="articleForm">
-                        <div class="form-group"><label>Title</label><input type="text" id="a-title" required/></div>
-                        <div class="form-group"><label>Image URL</label><input type="text" id="a-image" required/></div>
-                        <div class="form-group"><label>Subtitle</label><input type="text" id="a-sub"/></div>
-                        <div class="form-group"><label>Description</label><input type="text" id="a-desc"/></div>
+                        <div class="form-group"><label>Title</label><input type="text" id="a-title" placeholder="e.g. The Quiet Editor" /></div>
+                        <div class="form-group"><label>Image URL</label><input type="text" id="a-image" placeholder="https://... or image.jpg" /></div>
+                        <div class="form-group"><label>Subtitle</label><input type="text" id="a-sub" placeholder="e.g. Craft · 2025" /></div>
+                        <div class="form-group"><label>Description</label><input type="text" id="a-desc" placeholder="Brief summary..." /></div>
                         <div class="form-group"><label>Full Article Content (Text)</label><textarea id="a-content" rows="6" placeholder="Write the full article text here..." style="width:100%; padding:0.8rem 1rem; font-family:Inter; font-size:0.95rem; font-weight:300; border:1px solid #d0d0d0; border-radius:8px; outline:none; background:#faf9f7; resize:vertical;"></textarea></div>
                         <button type="submit" class="btn" id="a-submit">Add Article →</button>
                         <button type="button" class="btn cancel-edit-btn" id="a-cancel">Cancel</button>
@@ -166,21 +166,18 @@
                 </div>
             </div>
 
-            <!-- ✅ UPDATED EVENTS FORM (Location Optional) -->
+            <!-- EVENTS FORM -->
             <div id="events" class="admin-form-section">
                 <div class="form-container">
                     <h2 style="font-weight:300;font-size:1.5rem;margin-bottom:0.2rem;">Add a New Event</h2>
-                    <div class="sub" style="border-bottom:none;padding-bottom:0.5rem;">Fill in the details below. Use the calendar & time picker.</div>
+                    <div class="sub" style="border-bottom:none;padding-bottom:0.5rem;">Fill in the details below. All fields are optional.</div>
                     <form id="eventForm">
-                        <div class="form-group"><label>Title</label><input type="text" id="e-title" required/></div>
-                        <div class="form-group"><label>Image URL</label><input type="text" id="e-image" required/></div>
-                        
-                        <div class="form-group"><label>Date & Time</label><input type="datetime-local" id="e-date" required/></div>
-                        
-                        <div class="form-group"><label>Location</label><input type="text" id="e-location" placeholder="e.g. Powell's Books, Portland" /></div> <!-- 🔥 'required' നീക്കം ചെയ്തു -->
-                        
-                        <div class="form-group"><label>Description</label><input type="text" id="e-desc"/></div>
-                        <div class="form-group"><label>Register Link</label><input type="url" id="e-link" required/></div>
+                        <div class="form-group"><label>Title</label><input type="text" id="e-title" placeholder="e.g. Book Launch" /></div>
+                        <div class="form-group"><label>Image URL</label><input type="text" id="e-image" placeholder="https://... or image.jpg" /></div>
+                        <div class="form-group"><label>Date & Time</label><input type="datetime-local" id="e-date" /></div>
+                        <div class="form-group"><label>Location</label><input type="text" id="e-location" placeholder="e.g. Powell's Books, Portland" /></div>
+                        <div class="form-group"><label>Description</label><input type="text" id="e-desc" placeholder="Brief description..." /></div>
+                        <div class="form-group"><label>Register Link</label><input type="url" id="e-link" placeholder="https://..." /></div>
                         <button type="submit" class="btn" id="e-submit">Add Event →</button>
                         <button type="button" class="btn cancel-edit-btn" id="e-cancel">Cancel</button>
                     </form>
@@ -194,14 +191,14 @@
             <div id="interviews" class="admin-form-section">
                 <div class="form-container">
                     <h2 style="font-weight:300;font-size:1.5rem;margin-bottom:0.2rem;">Add a New Interview</h2>
-                    <div class="sub" style="border-bottom:none;padding-bottom:0.5rem;">Fill in the details below.</div>
+                    <div class="sub" style="border-bottom:none;padding-bottom:0.5rem;">Fill in the details below. All fields are optional.</div>
                     <form id="interviewForm">
-                        <div class="form-group"><label>Title</label><input type="text" id="i-title" required/></div>
-                        <div class="form-group"><label>Image URL</label><input type="text" id="i-image" required/></div>
-                        <div class="form-group"><label>With</label><input type="text" id="i-with" required/></div>
-                        <div class="form-group"><label>Location</label><input type="text" id="i-location" required/></div>
-                        <div class="form-group"><label>Description</label><input type="text" id="i-desc"/></div>
-                        <div class="form-group"><label>Read Link</label><input type="url" id="i-link" required/></div>
+                        <div class="form-group"><label>Title</label><input type="text" id="i-title" placeholder="e.g. In Conversation" /></div>
+                        <div class="form-group"><label>Image URL</label><input type="text" id="i-image" placeholder="https://... or image.jpg" /></div>
+                        <div class="form-group"><label>With</label><input type="text" id="i-with" placeholder="e.g. Maya Sen" /></div>
+                        <div class="form-group"><label>Location</label><input type="text" id="i-location" placeholder="e.g. Portland Art Museum" /></div>
+                        <div class="form-group"><label>Description</label><input type="text" id="i-desc" placeholder="Brief summary..." /></div>
+                        <div class="form-group"><label>Read Link</label><input type="url" id="i-link" placeholder="https://..." /></div>
                         <button type="submit" class="btn" id="i-submit">Add Interview →</button>
                         <button type="button" class="btn cancel-edit-btn" id="i-cancel">Cancel</button>
                     </form>
@@ -211,13 +208,13 @@
                 </div>
             </div>
 
-            <!-- ✅ UPDATED GALLERY (Caption Optional) -->
+            <!-- GALLERY -->
             <div id="gallery" class="admin-form-section">
                 <div class="form-container">
                     <h2 style="font-weight:300;font-size:1.5rem;margin-bottom:0.2rem;">Add a New Image</h2>
-                    <div class="sub" style="border-bottom:none;padding-bottom:0.5rem;">Fill in the details below.</div>
+                    <div class="sub" style="border-bottom:none;padding-bottom:0.5rem;">Fill in the details below. All fields are optional.</div>
                     <form id="galleryForm">
-                        <div class="form-group"><label>Image URL</label><input type="text" id="g-image" required/></div>
+                        <div class="form-group"><label>Image URL</label><input type="text" id="g-image" placeholder="https://... or image.jpg" /></div>
                         <div class="form-group"><label>Caption</label><input type="text" id="g-caption" placeholder="e.g. Book cover draft" /></div>
                         <button type="submit" class="btn" id="g-submit">Add Image →</button>
                         <button type="button" class="btn cancel-edit-btn" id="g-cancel">Cancel</button>
@@ -232,12 +229,12 @@
             <div id="archives" class="admin-form-section">
                 <div class="form-container">
                     <h2 style="font-weight:300;font-size:1.5rem;margin-bottom:0.2rem;">Add a New Archive</h2>
-                    <div class="sub" style="border-bottom:none;padding-bottom:0.5rem;">Fill in the details below.</div>
+                    <div class="sub" style="border-bottom:none;padding-bottom:0.5rem;">Fill in the details below. All fields are optional.</div>
                     <form id="archiveForm">
-                        <div class="form-group"><label>Title (Newspaper Name)</label><input type="text" id="ar-title" required/></div>
-                        <div class="form-group"><label>Image URL</label><input type="text" id="ar-image" required/></div>
-                        <div class="form-group"><label>Published Date</label><input type="text" id="ar-date" placeholder="e.g. March 1985" required/></div>
-                        <div class="form-group"><label>Description</label><input type="text" id="ar-desc" placeholder="A brief description..."/></div>
+                        <div class="form-group"><label>Title (Newspaper Name)</label><input type="text" id="ar-title" placeholder="e.g. Malayala Manorama" /></div>
+                        <div class="form-group"><label>Image URL</label><input type="text" id="ar-image" placeholder="https://... or image.jpg" /></div>
+                        <div class="form-group"><label>Published Date</label><input type="text" id="ar-date" placeholder="e.g. March 1985" /></div>
+                        <div class="form-group"><label>Description</label><input type="text" id="ar-desc" placeholder="A brief description..." /></div>
                         <button type="submit" class="btn" id="ar-submit">Add Archive →</button>
                         <button type="button" class="btn cancel-edit-btn" id="ar-cancel">Cancel</button>
                     </form>
@@ -393,58 +390,58 @@
 
             // Books
             handleSubmit('bookForm', 'b-msg', 'books', () => ({
-                title: document.getElementById('b-title').value,
-                image: document.getElementById('b-image').value,
-                sub: document.getElementById('b-sub').value,
-                desc: document.getElementById('b-desc').value,
-                link: document.getElementById('b-link').value,
-                price: document.getElementById('b-price').value
+                title: document.getElementById('b-title').value || '',
+                image: document.getElementById('b-image').value || '',
+                sub: document.getElementById('b-sub').value || '',
+                desc: document.getElementById('b-desc').value || '',
+                link: document.getElementById('b-link').value || '',
+                price: document.getElementById('b-price').value || ''
             }));
             // Journals
             handleSubmit('journalForm', 'j-msg', 'journals', () => ({
-                title: document.getElementById('j-title').value,
-                image: document.getElementById('j-image').value,
-                sub: document.getElementById('j-sub').value,
-                desc: document.getElementById('j-desc').value,
-                link: document.getElementById('j-link').value
+                title: document.getElementById('j-title').value || '',
+                image: document.getElementById('j-image').value || '',
+                sub: document.getElementById('j-sub').value || '',
+                desc: document.getElementById('j-desc').value || '',
+                link: document.getElementById('j-link').value || ''
             }));
             // Articles
             handleSubmit('articleForm', 'a-msg', 'articles', () => ({
-                title: document.getElementById('a-title').value,
-                image: document.getElementById('a-image').value,
-                sub: document.getElementById('a-sub').value,
-                desc: document.getElementById('a-desc').value,
-                content: document.getElementById('a-content').value
+                title: document.getElementById('a-title').value || '',
+                image: document.getElementById('a-image').value || '',
+                sub: document.getElementById('a-sub').value || '',
+                desc: document.getElementById('a-desc').value || '',
+                content: document.getElementById('a-content').value || ''
             }));
-            // Events (Location Optional)
+            // Events
             handleSubmit('eventForm', 'e-msg', 'events', () => ({
-                title: document.getElementById('e-title').value,
-                image: document.getElementById('e-image').value,
-                date: document.getElementById('e-date').value,
-                location: document.getElementById('e-location').value || '', // 🔥 ശൂന്യമാണെങ്കിൽ empty string
-                desc: document.getElementById('e-desc').value,
-                link: document.getElementById('e-link').value
+                title: document.getElementById('e-title').value || '',
+                image: document.getElementById('e-image').value || '',
+                date: document.getElementById('e-date').value || '',
+                location: document.getElementById('e-location').value || '',
+                desc: document.getElementById('e-desc').value || '',
+                link: document.getElementById('e-link').value || ''
             }));
             // Interviews
             handleSubmit('interviewForm', 'i-msg', 'interviews', () => ({
-                title: document.getElementById('i-title').value,
-                image: document.getElementById('i-image').value,
-                with: document.getElementById('i-with').value,
-                location: document.getElementById('i-location').value,
-                desc: document.getElementById('i-desc').value,
-                link: document.getElementById('i-link').value
+                title: document.getElementById('i-title').value || '',
+                image: document.getElementById('i-image').value || '',
+                with: document.getElementById('i-with').value || '',
+                location: document.getElementById('i-location').value || '',
+                desc: document.getElementById('i-desc').value || '',
+                link: document.getElementById('i-link').value || ''
             }));
-            // Gallery (Caption Optional)
+            // Gallery
             handleSubmit('galleryForm', 'g-msg', 'gallery', () => ({
-                image: document.getElementById('g-image').value,
+                image: document.getElementById('g-image').value || '',
                 caption: document.getElementById('g-caption').value || ''
             }));
             // Archives
             handleSubmit('archiveForm', 'ar-msg', 'archives', () => ({
-                title: document.getElementById('ar-title').value,
-                image: document.getElementById('ar-image').value,
-                date: document.getElementById('ar-date').value,
-                desc: document.getElementById('ar-desc').value
+                title: document.getElementById('ar-title').value || '',
+                image: document.getElementById('ar-image').value || '',
+                date: document.getElementById('ar-date').value || '',
+                desc: document.getElementById('ar-desc').value || ''
             }));
         }
 
