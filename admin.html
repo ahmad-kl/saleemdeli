@@ -126,7 +126,7 @@
                 </div>
             </div>
 
-            <!-- JOURNALS -->
+            <!-- ✅ UPDATED JOURNALS FORM (WITH CONTENT) -->
             <div id="journals" class="admin-form-section">
                 <div class="form-container">
                     <h2 style="font-weight:300;font-size:1.5rem;margin-bottom:0.2rem;">Add a New Journal</h2>
@@ -136,6 +136,13 @@
                         <div class="form-group"><label>Image URL</label><input type="text" id="j-image" placeholder="https://... or image.jpg" /></div>
                         <div class="form-group"><label>Subtitle</label><input type="text" id="j-sub" placeholder="e.g. Issue No. 9" /></div>
                         <div class="form-group"><label>Description</label><input type="text" id="j-desc" placeholder="A brief description..." /></div>
+                        
+                        <!-- 🔥 NEW: Full Journal Content (Text) Field 🔥 -->
+                        <div class="form-group">
+                            <label>Full Journal Content (Text)</label>
+                            <textarea id="j-content" rows="6" placeholder="Write the full journal text here..." style="width:100%; padding:0.8rem 1rem; font-family:Inter; font-size:0.95rem; font-weight:300; border:1px solid #d0d0d0; border-radius:8px; outline:none; background:#faf9f7; resize:vertical;"></textarea>
+                        </div>
+
                         <div class="form-group"><label>Buy Link</label><input type="url" id="j-link" placeholder="https://..." /></div>
                         <button type="submit" class="btn" id="j-submit">Add Journal →</button>
                         <button type="button" class="btn cancel-edit-btn" id="j-cancel">Cancel</button>
@@ -397,12 +404,13 @@
                 link: document.getElementById('b-link').value || '',
                 price: document.getElementById('b-price').value || ''
             }));
-            // Journals
+            // ✅ Journals (Content added)
             handleSubmit('journalForm', 'j-msg', 'journals', () => ({
                 title: document.getElementById('j-title').value || '',
                 image: document.getElementById('j-image').value || '',
                 sub: document.getElementById('j-sub').value || '',
                 desc: document.getElementById('j-desc').value || '',
+                content: document.getElementById('j-content').value || '', // ✅ Added
                 link: document.getElementById('j-link').value || ''
             }));
             // Articles
@@ -498,7 +506,7 @@
             // Map collection to form inputs
             const inputMap = {
                 'books': ['b-title', 'b-image', 'b-sub', 'b-desc', 'b-link', 'b-price'],
-                'journals': ['j-title', 'j-image', 'j-sub', 'j-desc', 'j-link'],
+                'journals': ['j-title', 'j-image', 'j-sub', 'j-desc', 'j-content', 'j-link'], // ✅ Updated
                 'articles': ['a-title', 'a-image', 'a-sub', 'a-desc', 'a-content'],
                 'events': ['e-title', 'e-image', 'e-date', 'e-location', 'e-desc', 'e-link'],
                 'interviews': ['i-title', 'i-image', 'i-with', 'i-location', 'i-desc', 'i-link'],
