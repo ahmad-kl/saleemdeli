@@ -522,7 +522,6 @@
                     const data = doc.data();
                     const card = document.createElement('div');
                     card.className = 'card';
-                    // 🔥 Replace link with button triggering modal
                     card.innerHTML = `
                             <img src="${data.image}" alt="${data.title}" />
                             <h3>${data.title}</h3>
@@ -539,7 +538,7 @@
         }
         load();
 
-        // 🔥 NEW: JOURNAL MODAL FUNCTIONS 🔥
+        // 🔥 UPDATED: JOURNAL MODAL FUNCTIONS (WITH LINK CHECK) 🔥
         async function openJournalModal(id) {
             const modal = document.getElementById('journalModal');
             document.getElementById('journalModalTitle').textContent = "Loading...";
@@ -555,11 +554,17 @@
                     document.getElementById('journalModalTitle').textContent = data.title || 'Untitled';
                     document.getElementById('journalModalSub').textContent = data.sub || '';
                     
-                    // 🔥 Check if content exists, otherwise offer the link
+                    // 🔥 Updated Logic: Show link only if link exists
                     if (data.content && data.content.trim() !== '') {
                         document.getElementById('journalModalContent').textContent = data.content;
                     } else {
-                        document.getElementById('journalModalContent').innerHTML = `No full text available. <br><br> <a href="${data.link}" target="_blank" class="btn" style="margin-top: 1rem; display: inline-block; text-decoration: none;">View Original Link →</a>`;
+                        // No content, check if link exists
+                        if (data.link && data.link.trim() !== '') {
+                            document.getElementById('journalModalContent').innerHTML = `No full text available. <br><br> <a href="${data.link}" target="_blank" class="btn" style="margin-top: 1rem; display: inline-block; text-decoration: none;">View Original Link →</a>`;
+                        } else {
+                            // Neither content nor link
+                            document.getElementById('journalModalContent').textContent = "No full text available.";
+                        }
                     }
                 } else {
                     document.getElementById('journalModalContent').textContent = "Journal not found.";
