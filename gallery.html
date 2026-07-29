@@ -113,10 +113,14 @@
             transform: rotate(-45deg) translate(5px, -5px);
         }
 
-        /* 🔥 UPDATED MOBILE NAV (820px, plus special fix for ultra-wide phones like S26 Ultra) 🔥 */
-        @media (max-width: 820px), (min-width: 1440px) {
+        /* 🔥 PERFECTLY TUNED MOBILE NAV 🔥 
+           - 820px-ൽ താഴെ (ഫോണുകൾ) -> ഹാംബർഗർ കാണും.
+           - 1440px മുതൽ 1500px വരെ (S26 Ultra പോലുള്ള വലിയ ഫോണുകൾ) -> ഹാംബർഗർ കാണും.
+           - 1366px (ലാപ്ടോപ്പ്), 1920px (മോണിറ്റർ) -> പൂർണ്ണ മെനു കാണും.
+        */
+        @media (max-width: 820px), (min-width: 1440px) and (max-width: 1500px) {
             .hamburger {
-                display: flex;
+                display: flex !important;
             }
 
             .nav {
