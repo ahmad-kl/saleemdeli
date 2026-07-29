@@ -340,6 +340,73 @@
                 padding: 1.5rem 1.5rem 2rem;
             }
         }
+
+        /* 🔥 NEW: POPUP MODAL STYLES 🔥 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-box {
+            background: #faf9f7;
+            max-width: 600px;
+            width: 100%;
+            max-height: 80vh;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            overflow-y: auto;
+            position: relative;
+        }
+        .modal-box .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 1.5rem;
+            color: #888;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: color 0.2s;
+        }
+        .modal-box .close-btn:hover {
+            color: #1e1e1e;
+        }
+        .modal-box h2 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+        .modal-box .modal-sub {
+            color: #7a7a7a;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .modal-box .modal-content {
+            font-size: 1rem;
+            font-weight: 300;
+            color: #4a4a4a;
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
+        @media(max-width:600px) {
+            .modal-box {
+                padding: 1.5rem;
+            }
+            .modal-box h2 {
+                font-size: 1.4rem;
+            }
+        }
     </style>
 </head>
 
@@ -377,6 +444,16 @@
             <!-- ഇവിടെ JavaScript വഴി കാർഡുകൾ വരും -->
         </div>
     </main>
+
+    <!-- 🔥 NEW: JOURNALS POPUP MODAL 🔥 -->
+    <div id="journalModal" class="modal-overlay" onclick="if(event.target===this) closeJournalModal()">
+        <div class="modal-box">
+            <button class="close-btn" onclick="closeJournalModal()">×</button>
+            <h2 id="journalModalTitle">Title</h2>
+            <span class="modal-sub" id="journalModalSub">Subtitle</span>
+            <div class="modal-content" id="journalModalContent">Loading...</div>
+        </div>
+    </div>
 
     <!-- ─── FOOTER ─── -->
     <footer class="footer">
@@ -445,12 +522,13 @@
                     const data = doc.data();
                     const card = document.createElement('div');
                     card.className = 'card';
+                    // 🔥 Replace link with button triggering modal
                     card.innerHTML = `
                             <img src="${data.image}" alt="${data.title}" />
                             <h3>${data.title}</h3>
                             <div class="sub">${data.sub || ''}</div>
                             <p class="desc">${data.desc || ''}</p>
-                            <a href="${data.link}" target="_blank" class="btn">Read Full →</a>
+                            <button class="btn" onclick='openJournalModal("${doc.id}")'>Read Full →</button>
                         `;
                     container.appendChild(card);
                 });
@@ -460,6 +538,42 @@
             }
         }
         load();
+
+        // 🔥 NEW: JOURNAL MODAL FUNCTIONS 🔥
+        async function openJournalModal(id) {
+            const modal = document.getElementById('journalModal');
+            document.getElementById('journalModalTitle').textContent = "Loading...";
+            document.getElementById('journalModalSub').textContent = "";
+            document.getElementById('journalModalContent').textContent = "Please wait...";
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            try {
+                const doc = await db.collection('journals').doc(id).get();
+                if (doc.exists) {
+                    const data = doc.data();
+                    document.getElementById('journalModalTitle').textContent = data.title || 'Untitled';
+                    document.getElementById('journalModalSub').textContent = data.sub || '';
+                    
+                    // 🔥 Check if content exists, otherwise offer the link
+                    if (data.content && data.content.trim() !== '') {
+                        document.getElementById('journalModalContent').textContent = data.content;
+                    } else {
+                        document.getElementById('journalModalContent').innerHTML = `No full text available. <br><br> <a href="${data.link}" target="_blank" class="btn" style="margin-top: 1rem; display: inline-block; text-decoration: none;">View Original Link →</a>`;
+                    }
+                } else {
+                    document.getElementById('journalModalContent').textContent = "Journal not found.";
+                }
+            } catch (e) {
+                console.error(e);
+                document.getElementById('journalModalContent').textContent = "Error loading content.";
+            }
+        }
+
+        function closeJournalModal() {
+            document.getElementById('journalModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
 
         // ── Footer Year ──
         document.getElementById('year').textContent = new Date().getFullYear();
